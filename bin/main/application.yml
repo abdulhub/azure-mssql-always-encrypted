@@ -1,0 +1,64 @@
+spring:
+  jpa:
+    generate-ddl: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+    health:
+      sensitive: false
+---
+spring:
+  profiles: sqlserver-local
+  datasource:
+    url: "jdbc:sqlserver://algoserver.database.windows.net:1433;database=musicdb;Encrypt=true;TrustServerCertificate=false;HostNameInCertificate=*.database.windows.net;loginTimeout=30"
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    dataSourceProperties.ColumnEncryptionSetting: "Enabled"
+    username: algoroot
+    password: Cloud123#
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServerDialect
+
+azure:
+  vault: 
+    clientId: ee1d870d-993d-4edd-b536-34ad3e476586
+    clientSecret: mNs5pjxlVj+n5P.kw5_2/_r06q=u1lV.
+
+---
+spring:
+  profiles: mysql
+  datasource:
+    url: "jdbc:mysql://localhost/music"
+    driver-class-name: com.mysql.jdbc.Driver
+    username:
+    password: 
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL55Dialect
+
+---
+spring:
+  profiles: postgres
+  datasource:
+    url: "jdbc:postgresql://localhost/music"
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: 
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.ProgressDialect
+
+---
+spring:
+  profiles: mongodb
+  data:
+    mongodb:
+      uri: mongodb://
+
